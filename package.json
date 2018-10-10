@@ -1,0 +1,25 @@
+{
+  "name": "node-mongoose-util",
+  "version": "1.0.0",
+  "description": "Utility library with helper function for mongoose and node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/kasongoyo/node-mongoose-util.git"
+  },
+  "keywords": [
+    "node",
+    "mongoose",
+    "utilities",
+    "helpers"
+  ],
+  "author": "kasongoyo@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kasongoyo/node-mongoose-util/issues"
+  },
+  "homepage": "https://github.com/kasongoyo/node-mongoose-util#readme"
+}
