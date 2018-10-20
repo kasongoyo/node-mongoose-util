@@ -25,13 +25,26 @@ function extractQuery(options = {}) {
 
   let conditions = {};
   let fields;
+  let page;
+  let limit;
   Object.keys(query).forEach(key => {
     if (ignore && ignore.includes(key)) {
       return;
     }
     if (key !== 'fields' && !Array.isArray(query[key])) {
+      // key is not fields and it's value is not array
       if (key === 'id') {
         conditions._id = query[key];
+        return;
+      }
+      if (key === 'page') {
+        // page number, works with pagination
+        page = query[key];
+        return;
+      }
+      if (key === 'limit') {
+        // result limit, works with pagination
+        limit = query[key];
         return;
       }
       if (toLowerCase) {
@@ -42,6 +55,7 @@ function extractQuery(options = {}) {
       return;
     }
     if (key !== 'fields' && Array.isArray(query[key])) {
+      // key is not fields and it's value is an array
       if (key === 'id') {
         conditions._id = { '$in': query[key] };
         return;
@@ -50,10 +64,11 @@ function extractQuery(options = {}) {
       return;
     }
     if (key === 'fields') {
+      // fields to return;
       fields = query[key].replace(/,/g, ' ');
     }
   });
-  return { criteria: conditions, fields: fields };
+  return { criteria: conditions, fields: fields, page, limit };
 }
 
 module.exports = {
