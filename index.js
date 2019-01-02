@@ -47,7 +47,7 @@ function extractQuery(options = {}) {
         limit = query[key];
         return;
       }
-      if (toLowerCase) {
+      if (toLowerCase && typeof query[key] === 'string') {
         conditions[key] = query[key].toLowerCase();
       } else {
         conditions[key] = query[key];
