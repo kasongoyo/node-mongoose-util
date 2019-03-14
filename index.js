@@ -35,12 +35,12 @@ function extractQuery(options = {}) {
     if (key === 'fields') {
       // fields to return;
       fields = query[key].replace(/,/g, ' ');
-      continue;
+      return;
     }
     if (key === 'sort') {
       // fields to return;
       sort = query[key].replace(/,/g, ' ');
-      continue;
+      return;
     }
 
     if (!Array.isArray(query[key])) {
