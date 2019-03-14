@@ -1,6 +1,6 @@
 {
   "name": "node-mongoose-util",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Utility library with helper function for mongoose and node",
   "main": "index.js",
   "scripts": {
