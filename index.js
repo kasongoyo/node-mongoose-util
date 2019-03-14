@@ -25,6 +25,7 @@ function extractQuery(options = {}) {
 
   let conditions = {};
   let fields;
+  let sort;
   let page;
   let limit;
   Object.keys(query).forEach(key => {
@@ -67,8 +68,12 @@ function extractQuery(options = {}) {
       // fields to return;
       fields = query[key].replace(/,/g, ' ');
     }
+    if (key === 'sort') {
+      // fields to return;
+      sort = query[key].replace(/,/g, ' ');
+    }
   });
-  return { criteria: conditions, fields: fields, page, limit };
+  return { criteria: conditions, fields, sort, page, limit };
 }
 
 module.exports = {
