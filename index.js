@@ -32,7 +32,18 @@ function extractQuery(options = {}) {
     if (ignore && ignore.includes(key)) {
       return;
     }
-    if (key !== 'fields' && !Array.isArray(query[key])) {
+    if (key === 'fields') {
+      // fields to return;
+      fields = query[key].replace(/,/g, ' ');
+      continue;
+    }
+    if (key === 'sort') {
+      // fields to return;
+      sort = query[key].replace(/,/g, ' ');
+      continue;
+    }
+
+    if (!Array.isArray(query[key])) {
       // key is not fields and it's value is not array
       if (key === 'id') {
         conditions._id = query[key];
@@ -55,7 +66,7 @@ function extractQuery(options = {}) {
       }
       return;
     }
-    if (key !== 'fields' && Array.isArray(query[key])) {
+    if (Array.isArray(query[key])) {
       // key is not fields and it's value is an array
       if (key === 'id') {
         conditions._id = { '$in': query[key] };
@@ -63,14 +74,6 @@ function extractQuery(options = {}) {
       }
       conditions[key] = { '$in': query[key] };
       return;
-    }
-    if (key === 'fields') {
-      // fields to return;
-      fields = query[key].replace(/,/g, ' ');
-    }
-    if (key === 'sort') {
-      // fields to return;
-      sort = query[key].replace(/,/g, ' ');
     }
   });
   return { criteria: conditions, fields, sort, page, limit };
