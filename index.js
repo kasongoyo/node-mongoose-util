@@ -16,12 +16,11 @@
  * query 
  * @returns {Object} - Object with criteria and fields key
  */
-function extractQuery(options = {}) {
-  const { query, toLowerCase, ignore } = options; //query object
-
-  if (!query) {
+function extractQuery(options) {
+  if(!options || !options.query){
     return {};
   }
+  const { query, toLowerCase, ignore } = options; //query object
 
   let conditions = {};
   let fields;
