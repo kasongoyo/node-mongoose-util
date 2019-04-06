@@ -2,9 +2,12 @@
   "name": "node-mongoose-util",
   "version": "1.1.3",
   "description": "Utility library with helper function for mongoose and node",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/mocha/bin/mocha test/**/*.spec.js --reporter spec"
+  },
+  "engines": {
+    "node": ">=7.6.0"
   },
   "repository": {
     "type": "git",
@@ -16,10 +19,30 @@
     "utilities",
     "helpers"
   ],
-  "author": "kasongoyo@gmail.com",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/kasongoyo/node-mongoose-util/issues"
   },
-  "homepage": "https://github.com/kasongoyo/node-mongoose-util#readme"
+  "author": {
+    "name": "kasongoyo",
+    "email": "kasongoyo@gmail.com",
+    "url": "https://github.com/kasongoyo"
+  },
+  "license": "MIT",
+  "files": [
+    "lib/*"
+  ],
+  "contributors": [
+    {
+      "name": "kasongoyo",
+      "github": "https://github.com/kasongoyo"
+    }
+  ],
+  "homepage": "https://github.com/kasongoyo/node-mongoose-util#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-mocha": "^5.3.0",
+    "eslint-plugin-node": "^8.0.1",
+    "mocha": "^6.0.2"
+  }
 }
