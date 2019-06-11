@@ -12,7 +12,7 @@ describe('Test Lib', function () {
     describe('Parse Query', function () {
         it('should return empty object when query is not provided', function () {
             const parsed = lib.parseQuery();
-            expect(parsed).to.be.empty;
+            expect(parsed.query).to.be.empty;
         });
 
 
@@ -25,8 +25,8 @@ describe('Test Lib', function () {
                 limit: 10
             }
             const parsed = lib.parseQuery(rawQuery);
-            const {query, select, sort, page, limit} = parsed;
-            expect(query).to.eql({name: 'anonymous'});
+            const { query, select, sort, page, limit } = parsed;
+            expect(query).to.eql({ name: 'anonymous' });
             expect(select).to.equal('name age gender');
             expect(sort).to.equal('age');
             expect(page).to.equal(1);
@@ -38,25 +38,35 @@ describe('Test Lib', function () {
                 id: '3'
             }
             const parsed = lib.parseQuery(rawQuery);
-            const {query} = parsed;
-            expect(query).to.eql({_id: '3'});
+            const { query } = parsed;
+            expect(query).to.eql({ _id: '3' });
         });
 
-        it('should parse query successfully', function () {
+        it('should convert query comma separated query into mongoose in clause', function () {
+            const names = ['anonymous', 'test', 'quick'];
             const rawQuery = {
-                name: 'anonymous',
-                select: 'name,age,gender',
+                name: names.join(),
                 sort: 'age',
                 page: 1,
                 limit: 10
             }
             const parsed = lib.parseQuery(rawQuery);
-            const {query, select, sort, page, limit} = parsed;
-            expect(query).to.eql({name: 'anonymous'});
-            expect(select).to.equal('name age gender');
-            expect(sort).to.equal('age');
-            expect(page).to.equal(1);
-            expect(limit).to.equal(10);
+            const { query } = parsed;
+            expect(query.name).to.have.property('$in');
+            expect
+        });
+
+        it('should handle not equal query params', function () {
+            const rawQuery = {
+                name: 'neq|test',
+                sort: 'age',
+                page: 1,
+                limit: 10
+            }
+            const parsed = lib.parseQuery(rawQuery);
+            const { query } = parsed;
+            expect(query.name).to.have.property('$ne');
+            expect
         });
     });
 });

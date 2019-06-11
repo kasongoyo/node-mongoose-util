@@ -24,7 +24,7 @@ router.get('/users', (request, response, next) => {
 ```
 
 ## API
-### nodeMongooseUtil.parseQuery(query, ignore)
+### nodeMongooseUtil.parseQuery(query, ignore) => Object
 It parses query to create another query which is mongoose friendly. It takes in `query` and `ignore` parameters
 
 #### Params
@@ -34,3 +34,15 @@ Contain the key value pair of query string which is the result of the [bodyParse
 + **ignore** - String[]
 Array of string contain the name list of the query params to ignore in the final query produced by `parseQuery` function
 
+#### Return 
+Object with the following properties
++ **query** - object    
+Mongoose friendly criteria object
++ **select** - string   
+Space separated field names to select
++ **sort** - string       
+Space separated field names to use for sorting
++ **page** - number     
+Page number used with pagination
++ **limit** - number        
+Result limit used with pagination
