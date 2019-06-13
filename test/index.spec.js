@@ -66,6 +66,7 @@ describe('Test Lib', function () {
             const parsed = lib.parseQuery(rawQuery);
             const { query } = parsed;
             expect(query.name).to.have.property('$ne');
+            expect(query.name.$ne).to.equal('test');
             expect
         });
     });
