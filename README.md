@@ -38,7 +38,7 @@ Array of string contain the name list of the query params to ignore in the final
 Object with the following properties
 + **query** - object    
 Mongoose friendly criteria object
-+ **select** - string   
++ **fields** - string   
 Space separated field names to select
 + **sort** - string       
 Space separated field names to use for sorting

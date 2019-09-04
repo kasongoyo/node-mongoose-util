@@ -25,7 +25,7 @@ describe('Test Lib', function () {
                 limit: 10
             }
             const parsed = lib.parseQuery(rawQuery);
-            const { query, select, sort, page, limit } = parsed;
+            const { query, fields: select, sort, page, limit } = parsed;
             expect(query).to.eql({ name: 'anonymous' });
             expect(select).to.equal('name age gender');
             expect(sort).to.equal('age');
