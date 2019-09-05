@@ -24,7 +24,7 @@ describe('Test Lib', function () {
                 page: 1,
                 limit: 10
             }
-            const parsed = lib.parseQuery(rawQuery);
+            const parsed = lib.parseQuery({query:rawQuery});
             const { query, fields: select, sort, page, limit } = parsed;
             expect(query).to.eql({ name: 'anonymous' });
             expect(select).to.equal('name age gender');
@@ -37,7 +37,7 @@ describe('Test Lib', function () {
             const rawQuery = {
                 id: '3'
             }
-            const parsed = lib.parseQuery(rawQuery);
+            const parsed = lib.parseQuery({query: rawQuery});
             const { query } = parsed;
             expect(query).to.eql({ _id: '3' });
         });
@@ -50,7 +50,7 @@ describe('Test Lib', function () {
                 page: 1,
                 limit: 10
             }
-            const parsed = lib.parseQuery(rawQuery);
+            const parsed = lib.parseQuery({query: rawQuery, $in: ['name']});
             const { query } = parsed;
             expect(query.name).to.have.property('$in');
             expect
@@ -63,7 +63,7 @@ describe('Test Lib', function () {
                 page: 1,
                 limit: 10
             }
-            const parsed = lib.parseQuery(rawQuery);
+            const parsed = lib.parseQuery({query: rawQuery});
             const { query } = parsed;
             expect(query.name).to.have.property('$ne');
             expect(query.name.$ne).to.equal('test');

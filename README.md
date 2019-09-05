@@ -24,15 +24,21 @@ router.get('/users', (request, response, next) => {
 ```
 
 ## API
-### nodeMongooseUtil.parseQuery(query, ignore) => Object
-It parses query to create another query which is mongoose friendly. It takes in `query` and `ignore` parameters
+### nodeMongooseUtil.parseQuery(params) => Object
+It takes in query params from user and parse it to make them mongo friendly. It has the following characteristics;
+- Pagination support    
+It will not include `page` and `limit` fields in the result query if supplied. 
+- Not equal clause  
+If the query param field value preceded by `neq|`, it will output `$ne` operator query clause. 
+- Include query clause  
+It can create `$in` query clause for field contain comma seaprated values and included in `params.$in` key.
 
-#### Params
-+ **Query** - Object  
-Contain the key value pair of query string which is the result of the [bodyParser.urlEncoded](https://github.com/expressjs/body-parser#bodyparserurlencodedoptions)
+#### params
++ **params.query[required]** - Object  
+Required. Specifies the query object to be parsed
 
-+ **ignore** - String[]
-Array of string contain the name list of the query params to ignore in the final query produced by `parseQuery` function
++ **params.$in** - String[]
+Array of field names which can be transformed to `$in` query clause if they have comma separated values 
 
 #### Return 
 Object with the following properties
